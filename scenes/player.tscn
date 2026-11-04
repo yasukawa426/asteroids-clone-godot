@@ -1,0 +1,23 @@
+[gd_scene format=3 uid="uid://c1owlh285f82h"]
+
+[ext_resource type="Script" uid="uid://cdtkn33nsdy8f" path="res://scenes/player.gd" id="1_3vyb7"]
+
+[node name="Player" type="CharacterBody2D" unique_id=647980626]
+z_index = 10
+motion_mode = 1
+script = ExtResource("1_3vyb7")
+
+[node name="Polygon2D" type="Polygon2D" parent="." unique_id=37951550]
+color = Color(0.6509804, 0.6509804, 0.6509804, 0)
+antialiased = true
+invert_border = 0.1
+polygon = PackedVector2Array(-47.95872, -40.19311, -24, -24, 0, -16, 24, -24, 48, -40, 0.041289806, 55.80689)
+uv = PackedVector2Array(-47.95872, -40.19311, -32, -23.999998, 0, -15.999998, 32.000008, -23.999998, 48, -40, 0.041289806, 55.80689)
+
+[node name="Line2D" type="Line2D" parent="Polygon2D" unique_id=794383364]
+texture_filter = 1
+use_parent_material = true
+closed = true
+width = 2.0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=1443873916]
