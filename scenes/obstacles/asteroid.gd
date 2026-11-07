@@ -1,4 +1,5 @@
 class_name Asteroid extends Area2D
+signal destroyed(score: int, asteroid_position: Vector2, hp: int, direction: Vector2)
 
 #asteroid radius for each _hp value
 const ASTEROID_RADIUS = {
@@ -7,11 +8,18 @@ const ASTEROID_RADIUS = {
 	1: 16
 }
 
+const ASTEROID_SCORES = {
+	3: 20,
+	2: 50,
+	1: 100
+}
+
 const ASTEROID_SCENE = preload("res://scenes/obstacles/asteroid.tscn")
 
 const _MAX_SPEED: float = 650.0
 var _current_speed: float
 
+var _score: int
 var _hp: int
 # wether the asteroid is ready to be used (set hp, points, collision)
 var _is_ready: bool = false
@@ -53,6 +61,8 @@ func _on_area_entered(_area: Area2D) -> void:
 
 func set_hp(value: int) -> void:
 	_hp = value
+	_score = ASTEROID_SCORES[_hp]
+	
 	var points := _generate_asteroid(ASTEROID_RADIUS[_hp], 13)
 	$Line2D.points = points
 	$CollisionPolygon2D.polygon = points
@@ -66,20 +76,7 @@ func set_hp(value: int) -> void:
 	_is_ready = true
 
 func _die() -> void:
-	if _hp > 1:
-		var is_first: bool = true
-		# spawn 2 smaller asteroids
-		for i in range(2):
-			var asteroid: Asteroid = ASTEROID_SCENE.instantiate()
-			
-			asteroid.set_hp(_hp - 1)
-			asteroid.direction = direction.rotated((deg_to_rad(-25) if is_first else deg_to_rad(25))) # one asteroid goes left, the other goes right
-			asteroid.global_position = global_position + asteroid.direction * (ASTEROID_RADIUS[_hp - 1] * 2)
-			is_first = false
-
-			add_sibling(asteroid)
-	
-	
+	destroyed.emit(_score, global_position, _hp, direction)
 	queue_free()
 
 #TODO: make the asteroids flicker when intangible

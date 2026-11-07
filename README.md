@@ -23,7 +23,7 @@ You can move and shoot and stuff and die.
 	- [ ] Asteroids will drift around until the hit the player or are shot. If the player collides with one, they lose a life. Player explodes, after 3 seconds respawn in the middle. 
 	- [ ] Asteroid spawns in waves. For example, 4 big asteroids spawn in moving in random directions - the player kills all - then 5 big asteroids spawn after a short delay.
 	- [X] Varying speed
-- [ ] Add score
+- [X] Add score
 - [X] Add screen wrapping.
 - [ ] Add menus and UI.
 - [ ] Add sound effects and particles effects.
