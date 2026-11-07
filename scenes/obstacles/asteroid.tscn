@@ -6,10 +6,10 @@
 script = ExtResource("1_tm00o")
 
 [node name="Line2D" type="Line2D" parent="." unique_id=901271341]
+closed = true
 width = 1.0
 antialiased = true
 
-[node name="Timer" type="Timer" parent="." unique_id=1050891352]
-autostart = true
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=78440897]
 
-[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

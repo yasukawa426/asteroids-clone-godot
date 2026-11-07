@@ -3,8 +3,9 @@ extends Area2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	var points := _generate_asteroid(32, 10)
+	var points := _generate_asteroid(32, 13)
 	$Line2D.points = points
+	$CollisionPolygon2D.polygon = points
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
