@@ -20,7 +20,14 @@ var direction: Vector2 = Vector2.DOWN
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	if not _is_ready:
+		return
+		
+	if direction == Vector2.DOWN:
+		direction = direction.rotated(randf_range(0, deg_to_rad(360))) # random direction
+		
+	position += direction * _current_speed * delta
+	global_position = GameUtils.wrap_position(global_position, GameUtils.get_polygon_size($Line2D.points))
 
 # generate a new randomly shaped asteroid
 # radius: the aproximate radius of the asteroid
