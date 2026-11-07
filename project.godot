@@ -17,7 +17,7 @@ config/icon="res://icon.svg"
 
 [autoload]
 
-Global="*uid://niwk6vvv4ajr"
+GameUtils="*uid://dh1mtu73s5lou"
 
 [display]
 
