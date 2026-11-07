@@ -45,6 +45,12 @@ func _generate_asteroid(radius: float, point_count: int) -> PackedVector2Array:
 	# close the asteroid
 	#points.append(points[0])
 	return points
+
+
+func _on_area_entered(_area: Area2D) -> void:
+	print("Meteor hit something")
+	_die()
+
 func set_hp(value: int) -> void:
 	_hp = value
 	var points := _generate_asteroid(ASTEROID_RADIUS[_hp], 13)
@@ -58,6 +64,23 @@ func set_hp(value: int) -> void:
 		_current_speed = _MAX_SPEED * randf_range(0.4, 1)
 
 	_is_ready = true
+
+func _die() -> void:
+	if _hp > 1:
+		var is_first: bool = true
+		# spawn 2 smaller asteroids
+		for i in range(2):
+			var asteroid: Asteroid = ASTEROID_SCENE.instantiate()
+			
+			asteroid.set_hp(_hp - 1)
+			asteroid.direction = direction.rotated((deg_to_rad(-25) if is_first else deg_to_rad(25))) # one asteroid goes left, the other goes right
+			asteroid.global_position = global_position + asteroid.direction * (ASTEROID_RADIUS[_hp - 1] * 2)
+			is_first = false
+
+			add_sibling(asteroid)
+	
+	
+	queue_free()
 
 #TODO: make the asteroids flicker when intangible
 func _on_intangible_timer_timeout() -> void:
