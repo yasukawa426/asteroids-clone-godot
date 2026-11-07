@@ -18,9 +18,12 @@ You can move and shoot and stuff and die.
 ### Goals
 - [X] Player space ship. It should be able to rotate and thrust. Thrust will accelerate the ship in the direction it is facing. No friction.
 - [X] Player can shoot. The ship will shoot in the direction its facing and destroy asteroids. Bullets will despawn after a while.
-- [ ] Asteroids with 3 different sizes.
-    - [ ] Asteroids will break into 2 smaller asteroids when shot. The smallest variation will disappear when shot.
+- [X] Asteroids with 3 different sizes.
+    - [X] Asteroids will break into 2 smaller asteroids when shot. The smallest variation will disappear when shot.
     - [ ] Asteroids will drift around until the hit the player or are shot. If the player collides with one, they lose a life. Player explodes, after 3 seconds respawn in the middle. 
+    - [ ] Asteroid spawns in waves. For example, 4 big asteroids spawn in moving in random directions - the player kills all - then 5 big asteroids spawn after a short delay.
+    - [X] Varying speed
+- [ ] Add score
 - [X] Add screen wrapping.
 - [ ] Add menus and UI.
 - [ ] Add sound effects and particles effects.
