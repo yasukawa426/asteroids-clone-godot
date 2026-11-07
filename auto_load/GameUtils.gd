@@ -19,3 +19,17 @@ func wrap_position(position_vector: Vector2, object_size: Vector2) -> Vector2:
 		position_vector.y = 0 - half_size.y
 	
 	return position_vector
+
+# returns the bounding box (size) of a polygon (array of points)
+func get_polygon_size(polygon: PackedVector2Array) -> Vector2:
+	if polygon.size() == 0:
+		return Vector2.ZERO
+		
+	var rect = Rect2() #empty rectangle
+	for i in range(polygon.size()): # for each vertice
+		if i == 0: # if the initial point, make it the initial point for the rect
+			rect = Rect2(polygon[0], Vector2.ZERO)
+		else:
+			rect = rect.expand(polygon[i]) # if any other point we add it to the rect "stretching" it to this new format
+			
+	return rect.size
