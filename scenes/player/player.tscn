@@ -7,6 +7,8 @@ size = Vector2(76, 74)
 
 [node name="Player" type="CharacterBody2D" unique_id=647980626]
 z_index = 10
+collision_layer = 0
+collision_mask = 0
 motion_mode = 1
 script = ExtResource("1_3vyb7")
 
@@ -26,10 +28,20 @@ width = 2.0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=851998380]
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_3vyb7")
+disabled = true
 
 [node name="BulletMarker2D" type="Marker2D" parent="." unique_id=321002310]
 position = Vector2(0, 72)
 
 [node name="ShootCooldownTimer" type="Timer" parent="." unique_id=1692553109]
-wait_time = 0.5
+wait_time = 0.2
 one_shot = true
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1570079564]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=944980386]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_3vyb7")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

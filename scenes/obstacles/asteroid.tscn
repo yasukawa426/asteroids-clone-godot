@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://plyt27o1f071" path="res://scenes/obstacles/asteroid.gd" id="1_tm00o"]
 
 [node name="Asteroid" type="Area2D" unique_id=1826148465]
+collision_layer = 4
+collision_mask = 3
 script = ExtResource("1_tm00o")
 
 [node name="Line2D" type="Line2D" parent="." unique_id=901271341]
