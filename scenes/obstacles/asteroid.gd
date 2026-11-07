@@ -30,5 +30,7 @@ func _generate_asteroid(radius: float, point_count: int) -> PackedVector2Array:
 	return points
 
 
-func _on_timer_timeout() -> void:
-	$Line2D.points = _generate_asteroid(32, 13)
+#TODO: make the asteroids flicker when intangible
+func _on_intangible_timer_timeout() -> void:
+	set_deferred("monitorable", true)
+	set_deferred("monitoring", true)

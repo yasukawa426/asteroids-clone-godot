@@ -5,6 +5,8 @@
 [node name="Asteroid" type="Area2D" unique_id=1826148465]
 collision_layer = 4
 collision_mask = 3
+monitoring = false
+monitorable = false
 script = ExtResource("1_tm00o")
 
 [node name="Line2D" type="Line2D" parent="." unique_id=901271341]
@@ -13,5 +15,11 @@ width = 1.0
 antialiased = true
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="." unique_id=78440897]
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
+
+[node name="IntangibleTimer" type="Timer" parent="." unique_id=561950065]
+one_shot = true
+autostart = true
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="IntangibleTimer" to="." method="_on_intangible_timer_timeout"]
