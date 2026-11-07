@@ -13,7 +13,7 @@ config_version=5
 config/name="Asteroids"
 run/main_scene="uid://vq5qlf4fwb2t"
 config/features=PackedStringArray("4.6", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="uid://c0hdhgm3ig7xq"
 
 [autoload]
 
@@ -30,6 +30,11 @@ window/stretch/mode="canvas_items"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/project-time-tracker/plugin.cfg")
+
+[gui]
+
+theme/custom="uid://df6s5o285bs38"
+theme/custom_font="uid://tn3iudd2y6ri"
 
 [input]
 

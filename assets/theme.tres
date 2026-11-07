@@ -1,0 +1,7 @@
+[gd_resource type="Theme" format=3 uid="uid://df6s5o285bs38"]
+
+[ext_resource type="FontFile" uid="uid://tn3iudd2y6ri" path="res://assets/Hyperspace-JvEM.ttf" id="1_5x3i2"]
+
+[resource]
+default_font = ExtResource("1_5x3i2")
+default_font_size = 50
