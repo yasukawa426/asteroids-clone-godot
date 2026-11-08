@@ -35,15 +35,19 @@ func _on_asteroid_destroyed(points: int, asteroid_position: Vector2, hp: int, di
 	$HUD/UI/Label.text = str(score)
 
 	if hp > 1:
-		var is_first: bool = true
-		# spawn 2 smaller asteroids
-		for i in range(2):
-			var asteroid: Asteroid = ASTEROID_SCENE.instantiate()
-			
-			asteroid.set_hp(hp - 1)
-			asteroid.direction = direction.rotated((deg_to_rad(-25) if is_first else deg_to_rad(25))) # one asteroid goes left, the other goes right
-			asteroid.global_position = asteroid_position + asteroid.direction * (40* 2)
-			is_first = false
+		call_deferred("_spawn_split_asteroid", asteroid_position, hp, direction)
+		
+func _spawn_split_asteroid(asteroid_position: Vector2, hp: int, direction: Vector2) -> void:
+	var is_first: bool = true
+	# spawn 2 smaller asteroids
 
-			asteroid.destroyed.connect(_on_asteroid_destroyed)
-			add_child(asteroid)
+	for i in range(2):
+		var asteroid: Asteroid = ASTEROID_SCENE.instantiate()
+		
+		asteroid.set_hp(hp - 1)
+		asteroid.direction = direction.rotated((deg_to_rad(-25) if is_first else deg_to_rad(25))) # one asteroid goes left, the other goes right
+		asteroid.global_position = asteroid_position + asteroid.direction * (20 * 2)
+		is_first = false
+
+		asteroid.destroyed.connect(_on_asteroid_destroyed)
+		add_child(asteroid)

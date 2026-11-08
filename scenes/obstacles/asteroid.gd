@@ -63,9 +63,10 @@ func set_hp(value: int) -> void:
 	_hp = value
 	_score = ASTEROID_SCORES[_hp]
 	
-	var points := _generate_asteroid(ASTEROID_RADIUS[_hp], 13)
+	var points: PackedVector2Array = _generate_asteroid(ASTEROID_RADIUS[_hp], 13)
+	
 	$Line2D.points = points
-	$CollisionPolygon2D.polygon = points
+	$CollisionPolygon2D.set_deferred("polygon", points)
 	
 	# asteroid start slow and then get a random speed based on the max speed
 	if _hp == 3:
