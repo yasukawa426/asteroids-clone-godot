@@ -106,3 +106,10 @@ func start_game() -> void:
 	
 	_set_invulnerable(2.0)
 	_can_act = true
+	
+## Gives the player one more life with a max of 4. Returns the current lives.
+func life_up() -> int:
+	if _lives < 4:
+		_lives += 1
+	
+	return _lives

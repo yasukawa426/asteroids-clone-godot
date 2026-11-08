@@ -4,6 +4,7 @@ const ASTEROID_SCENE = preload("res://scenes/obstacles/asteroid.tscn")
 const PLAYER_SCENE = preload("res://scenes/player/player.tscn")
 const INITIAL_ASTEROIDS_NUMBER = 4
 
+var _life_score: int = 0
 var score: int = 0
 var player_node: Player
 
@@ -77,6 +78,14 @@ func _on_player_hit(lives: int) -> void:
 
 func _on_asteroid_destroyed(points: int, asteroid_position: Vector2, hp: int, direction: Vector2) -> void:
 	score += points
+	_life_score += points
+	
+	if _life_score >= 1000:
+		_life_score -= 1000
+		$HUD/UI/GridContainer/TextureProgressBar.value = player_node.life_up()
+		
+		#TODO: play sound effect
+	
 	$HUD/UI/GridContainer/Label.text = str(score)
 
 	if hp > 1:
