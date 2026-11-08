@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://plyt27o1f071" path="res://scenes/obstacles/asteroid.gd" id="1_tm00o"]
 
-[node name="Asteroid" type="Area2D" unique_id=1826148465]
+[node name="Asteroid" type="Area2D" unique_id=1826148465 groups=["asteroids"]]
 collision_layer = 4
 collision_mask = 3
 monitoring = false
