@@ -65,11 +65,7 @@ func _teleport_player_to_spawn() -> void:
 func _start_game() -> void:
 	$HUD/UI.show()
 	$HUD/MainMenu.hide()
-	
-	_delete_asteroids()
 
-	spawn_big_asteroid(INITIAL_ASTEROIDS_NUMBER)
-	
 	player_node.start_game()
 
 func _delete_asteroids() -> void:
