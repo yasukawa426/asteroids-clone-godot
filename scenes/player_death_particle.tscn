@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dsp00cd0jgpdi"]
+
+[ext_resource type="PackedScene" uid="uid://c1owlh285f82h" path="res://scenes/player/player.tscn" id="1_0rxxh"]
+
+[node name="CPUParticles2D" type="CPUParticles2D" unique_id=328379787]
+amount = 4
+lifetime = 2.5
+explosiveness = 1.0
+emission_shape = 2
+emission_sphere_radius = 40.28
+spread = 180.0
+gravity = Vector2(1, 1)
+initial_velocity_min = 6.0
+initial_velocity_max = 6.0
+linear_accel_min = -6.0
+linear_accel_max = -6.0
+
+[node name="Player" parent="." unique_id=647980626 instance=ExtResource("1_0rxxh")]
+position = Vector2(0, -8)
