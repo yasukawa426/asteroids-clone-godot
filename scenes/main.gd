@@ -31,20 +31,10 @@ func spawn_big_asteroid(spawn_position: Vector2 = Vector2.ZERO) -> void:
 
 	add_child(asteroid)
 
-func _on_player_hit(lifes: int) -> void:
-	$HUD/UI/TextureProgressBar.value = lifes
-
-func _on_asteroid_destroyed(points: int, asteroid_position: Vector2, hp: int, direction: Vector2) -> void:
-	score += points
-	$HUD/UI/Label.text = str(score)
-
-	if hp > 1:
-		call_deferred("_spawn_split_asteroid", asteroid_position, hp, direction)
-		
 func _spawn_split_asteroid(asteroid_position: Vector2, hp: int, direction: Vector2) -> void:
 	var is_first: bool = true
-	# spawn 2 smaller asteroids
 
+	# spawn 2 smaller asteroids
 	for i in range(2):
 		var asteroid: Asteroid = ASTEROID_SCENE.instantiate()
 		
@@ -60,6 +50,7 @@ func _spawn_player() -> void:
 	var player: Player = PLAYER_SCENE.instantiate()
 	
 	#connect signals
+	player.hit.connect(_on_player_hit)
 	
 	player.scale = Vector2.ONE * 0.5
 	
@@ -68,3 +59,14 @@ func _spawn_player() -> void:
 
 func _teleport_player_to_spawn() -> void:
 	$Player.global_position = $PlayerSpawnMarker2D.global_position
+
+func _on_player_hit(lives: int) -> void:
+	$HUD/UI/TextureProgressBar.value = lives
+
+func _on_asteroid_destroyed(points: int, asteroid_position: Vector2, hp: int, direction: Vector2) -> void:
+	score += points
+	$HUD/UI/Label.text = str(score)
+
+	if hp > 1:
+		call_deferred("_spawn_split_asteroid", asteroid_position, hp, direction)
+		
