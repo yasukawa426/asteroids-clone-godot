@@ -18,11 +18,17 @@ var _lives: int = 4
 var _can_act: bool = false
 
 func _ready() -> void:
-	var polygon = $Polygon2D.polygon
-
-	$Polygon2D/Line2D.points = polygon
+	var polygon: PackedVector2Array = $Polygon2D.polygon
 
 	screen_bounds = get_viewport_rect().size
+	
+	# draws the player with multiple lines2d so later we can destroy the ship
+	for i in polygon.size():
+		var line: Line2D = Line2D.new()
+
+		line.width = 2
+		line.points = [polygon[i], polygon[(i + 1) % polygon.size()]] # connect the last point to the first point
+		$Polygon2D.add_child(line)
 
 func _physics_process(delta: float) -> void:
 	if not _can_act:

@@ -19,12 +19,6 @@ invert_border = 0.1
 polygon = PackedVector2Array(-47.95872, -40.19311, -24, -24, 0, -16, 24, -24, 48, -40, 0.041289806, 55.80689)
 uv = PackedVector2Array(-47.95872, -40.19311, -32, -23.999998, 0, -15.999998, 32.000008, -23.999998, 48, -40, 0.041289806, 55.80689)
 
-[node name="Line2D" type="Line2D" parent="Polygon2D" unique_id=794383364]
-texture_filter = 1
-use_parent_material = true
-closed = true
-width = 2.0
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=851998380]
 position = Vector2(0, 6)
 shape = SubResource("RectangleShape2D_3vyb7")
