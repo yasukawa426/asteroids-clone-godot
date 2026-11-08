@@ -3,16 +3,17 @@ signal start_game
 signal exit
 signal credits
 
+@export var animation_player: AnimationPlayer;
+
 func _ready() -> void:
-	_show_main_menu()
+	$UI.hide()
+	$MainMenu.show()
 
 func _show_main_menu() -> void:
-	$MainMenu.show()
-	$UI.hide()
+	animation_player.play("show_menu_hide_ui")
 
 func _show_ingame_ui() -> void:
-	$MainMenu.hide()
-	$UI.show()
+	animation_player.play("hide_menu_show_ui")
 
 func _on_play_main_menu_button_pressed() -> void:
 	start_game.emit()
