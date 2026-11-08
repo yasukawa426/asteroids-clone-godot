@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://qoi3cijieon2" path="res://scenes/main.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://c1owlh285f82h" path="res://scenes/player/player.tscn" id="1_o5qli"]
-[ext_resource type="Script" path="res://scenes/hud.gd" id="3_jyhfs"]
 [ext_resource type="Texture2D" uid="uid://dki1k4udrdnhk" path="res://assets/lives_transparent.png" id="3_sugp2"]
 
 [node name="Main" type="Node2D" unique_id=1529492562]
@@ -22,7 +21,6 @@ position = Vector2(381, 237)
 scale = Vector2(0.5, 0.5)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=876043722]
-script = ExtResource("3_jyhfs")
 
 [node name="UI" type="Control" parent="HUD" unique_id=1939468920]
 layout_mode = 3
