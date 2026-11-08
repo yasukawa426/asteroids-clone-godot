@@ -9,28 +9,28 @@ var player_node: Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	for i in INITIAL_ASTEROIDS_NUMBER:
-		spawn_big_asteroid()
+	spawn_big_asteroid(INITIAL_ASTEROIDS_NUMBER)
 	
 	_spawn_player()
 	_teleport_player_to_spawn()
 
 
-func spawn_big_asteroid(spawn_position: Vector2 = Vector2.ZERO) -> void:
-	var asteroid: Asteroid = ASTEROID_SCENE.instantiate()
+func spawn_big_asteroid(amount: int, spawn_position: Vector2 = Vector2.ZERO) -> void:
+	for i in amount:
+		var asteroid: Asteroid = ASTEROID_SCENE.instantiate()
 
-	if spawn_position != Vector2.ZERO:
-		asteroid.global_position = spawn_position
-	else:
-		asteroid.global_position = Vector2(
-				randf_range(0, GameUtils.viewport_size.x),
-				randf_range(0, GameUtils.viewport_size.y)
-		)
+		if spawn_position != Vector2.ZERO:
+			asteroid.global_position = spawn_position
+		else:
+			asteroid.global_position = Vector2(
+					randf_range(0, GameUtils.viewport_size.x),
+					randf_range(0, GameUtils.viewport_size.y)
+			)
 
-	asteroid.set_hp(3)
-	asteroid.destroyed.connect(_on_asteroid_destroyed)
+		asteroid.set_hp(3)
+		asteroid.destroyed.connect(_on_asteroid_destroyed)
 
-	add_child(asteroid)
+		add_child(asteroid)
 
 func _spawn_split_asteroid(asteroid_position: Vector2, hp: int, direction: Vector2) -> void:
 	var is_first: bool = true
@@ -68,8 +68,7 @@ func _start_game() -> void:
 	
 	_delete_asteroids()
 
-	for i in INITIAL_ASTEROIDS_NUMBER:
-		spawn_big_asteroid()
+	spawn_big_asteroid(INITIAL_ASTEROIDS_NUMBER)
 	
 	player_node.start_game()
 
