@@ -1,8 +1,7 @@
 [gd_scene format=3 uid="uid://vq5qlf4fwb2t"]
 
 [ext_resource type="Script" uid="uid://qoi3cijieon2" path="res://scenes/main.gd" id="1_0wfyh"]
-[ext_resource type="PackedScene" uid="uid://bb38c7o0c2egf" path="res://scenes/ui/main_menu_button.tscn" id="3_jyhfs"]
-[ext_resource type="Texture2D" uid="uid://dki1k4udrdnhk" path="res://assets/lives_transparent.png" id="3_sugp2"]
+[ext_resource type="PackedScene" uid="uid://crc3nyk76b37f" path="res://scenes/ui/hud.tscn" id="2_0wfyh"]
 
 [node name="Main" type="Node2D" unique_id=1529492562]
 texture_filter = 1
@@ -16,80 +15,11 @@ offset_bottom = 794.0
 scale = Vector2(1.7199997, 1.7199997)
 color = Color(0, 0, 0, 1)
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=876043722]
-layer = 10000
-
-[node name="UI" type="Control" parent="HUD" unique_id=1939468920]
-visible = false
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-scale = Vector2(0.8, 0.8)
-
-[node name="GridContainer" type="GridContainer" parent="HUD/UI" unique_id=956618599]
-layout_mode = 0
-offset_left = 18.749998
-offset_right = 304.75
-offset_bottom = 173.0
-
-[node name="Label" type="Label" parent="HUD/UI/GridContainer" unique_id=1432233174]
-layout_mode = 2
-text = "0"
-
-[node name="TextureProgressBar" type="TextureProgressBar" parent="HUD/UI/GridContainer" unique_id=382615828]
-layout_mode = 2
-max_value = 4.0
-value = 4.0
-texture_progress = ExtResource("3_sugp2")
-texture_progress_offset = Vector2(-2, 0)
-
-[node name="MainMenu" type="Control" parent="HUD" unique_id=1839171266]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Label" type="Label" parent="HUD/MainMenu" unique_id=230478138]
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -203.0
-offset_top = 139.0
-offset_right = 204.0
-offset_bottom = 232.0
-grow_horizontal = 2
-text = "asteroids"
-
-[node name="GridContainer" type="GridContainer" parent="HUD/MainMenu" unique_id=1438803218]
-layout_mode = 1
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 15.0
-offset_top = -311.0
-offset_right = 338.0
-grow_vertical = 0
-
-[node name="PlayMainMenuButton" parent="HUD/MainMenu/GridContainer" unique_id=428986994 instance=ExtResource("3_jyhfs")]
-layout_mode = 2
-text = "play"
-
-[node name="CreditsMainMenuButton" parent="HUD/MainMenu/GridContainer" unique_id=1553163213 instance=ExtResource("3_jyhfs")]
-layout_mode = 2
-text = "credits"
-
-[node name="ExitMainMenuButton2" parent="HUD/MainMenu/GridContainer" unique_id=1632861248 instance=ExtResource("3_jyhfs")]
-layout_mode = 2
-text = "exit"
+[node name="HUD" parent="." unique_id=1362206670 instance=ExtResource("2_0wfyh")]
+process_mode = 3
 
 [node name="PlayerSpawnMarker2D" type="Marker2D" parent="." unique_id=1450719650]
 position = Vector2(960, 540)
 metadata/_edit_lock_ = true
 
-[connection signal="pressed" from="HUD/MainMenu/GridContainer/PlayMainMenuButton" to="." method="_on_play_main_menu_button_pressed"]
+[connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]

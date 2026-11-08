@@ -7,6 +7,7 @@ const INITIAL_ASTEROIDS_NUMBER = 4
 var _life_score: int = 0
 var score: int = 0
 var player_node: Player
+@onready var hud_node: HUD = $HUD
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -58,15 +59,12 @@ func _spawn_player() -> void:
 	
 	player_node = player
 	add_child(player)
-	print("Player size: ", GameUtils.get_polygon_size($Player/Polygon2D.polygon))
+	print("Player size: ", GameUtils.get_polygon_size(player_node.get_node("Polygon2D").polygon))
 
 func _teleport_player_to_spawn() -> void:
-	$Player.global_position = $PlayerSpawnMarker2D.global_position
+	player_node.global_position = $PlayerSpawnMarker2D.global_position
 
 func _start_game() -> void:
-	$HUD/UI.show()
-	$HUD/MainMenu.hide()
-
 	player_node.start_game()
 
 func _delete_asteroids() -> void:
@@ -74,7 +72,7 @@ func _delete_asteroids() -> void:
 	get_tree().call_group("asteroids", "queue_free")
 
 func _on_player_hit(lives: int) -> void:
-	$HUD/UI/GridContainer/TextureProgressBar.value = lives
+	hud_node.update_lives(lives)
 
 func _on_asteroid_destroyed(points: int, asteroid_position: Vector2, hp: int, direction: Vector2) -> void:
 	score += points
@@ -82,15 +80,15 @@ func _on_asteroid_destroyed(points: int, asteroid_position: Vector2, hp: int, di
 	
 	if _life_score >= 1000:
 		_life_score -= 1000
-		$HUD/UI/GridContainer/TextureProgressBar.value = player_node.life_up()
+		hud_node.update_lives(player_node.life_up())
 		
 		#TODO: play sound effect
 	
-	$HUD/UI/GridContainer/Label.text = str(score)
+	hud_node.update_score(score)
 
 	if hp > 1:
 		call_deferred("_spawn_split_asteroid", asteroid_position, hp, direction)
 		
 
-func _on_play_main_menu_button_pressed() -> void:
+func _on_hud_start_game() -> void:
 	_start_game()
