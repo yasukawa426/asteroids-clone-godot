@@ -1,12 +1,21 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
+## emitted when the player is hit by an asteroid, passing the remaining lives.
+signal hit(lives: int)
+## emitted when the player is hit with 0 lives.
+signal gameover
 
-const MAX_SPEED = 700 # pixels/s
+const MAX_SPEED = 650 # pixels/s
 const ACCELERATION: float = MAX_SPEED * 1.5 # pixel/s²
 const TURN_SPEED = 5.0
 
 @export var bullet_scene: PackedScene = preload("res://scenes/player/bullet.tscn")
 
+## Player original position, used to reset the player after death.
+@onready var _spawn_position: Vector2 = global_position
+
 var screen_bounds: Vector2
+var _lives: int = 4
+var _can_act: bool = false
 
 func _ready() -> void:
 	var polygon = $Polygon2D.polygon
@@ -16,6 +25,9 @@ func _ready() -> void:
 	screen_bounds = get_viewport_rect().size
 
 func _physics_process(delta: float) -> void:
+	if not _can_act:
+		return
+	
 	global_position = GameUtils.wrap_position(global_position, $CollisionShape2D.shape.get_rect().size)
 
 	_handle_input(delta)
@@ -36,12 +48,15 @@ func _handle_input(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if not _can_act:
+		return
+	
 	if event.is_action_pressed("shoot") and $ShootCooldownTimer.is_stopped():
 		_shoot()
 
 func _shoot() -> void:
 	var bullet: Bullet = bullet_scene.instantiate()
-	var direction: Vector2 = ($BulletMarker2D.global_position - global_position ).normalized()
+	var direction: Vector2 = ($BulletMarker2D.global_position - global_position).normalized()
 	bullet.global_position = $BulletMarker2D.global_position
 	bullet.direction = direction
 	
@@ -51,16 +66,42 @@ func _shoot() -> void:
 
 # Disables the player hitbox for `time` seconds
 func _set_invulnerable(time: float) -> void:
+	#TODO: flicker the player sprite to indicate invulnerability
 	set_deferred("monitorable", false)
 	set_deferred("monitoring", false)
 	
 	$InvulnerabilityTimer.start(time)
+
+func _lose_life() -> void:
+	#TODO: kaboom and player cant act and hide for a while , play sound
+	global_position = _spawn_position
+	velocity = Vector2.ZERO
+
+func _die() -> void:
+	_can_act = false
+
+	set_deferred("monitorable", false)
+	set_deferred("monitoring", false)
+
+func _on_area_2d_area_entered(_area: Area2D) -> void:
+	print("Player got hit aaaa")
+	if _lives > 0:
+		_lives -= 1
+		hit.emit(_lives)
+
+		_lose_life()
+		_set_invulnerable(4.0)
+		
+	else:
+		gameover.emit()
+		_die()
+
 func _on_invulnerability_timer_timeout() -> void:
 	set_deferred("monitorable", true)
 	set_deferred("monitoring", true)
-	
 
 func start_game() -> void:
 	_lives = 4
 	
 	_set_invulnerable(2.0)
+	_can_act = true
