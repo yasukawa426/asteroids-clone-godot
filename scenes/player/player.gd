@@ -67,8 +67,8 @@ func _shoot() -> void:
 # Disables the player hitbox for `time` seconds
 func _set_invulnerable(time: float) -> void:
 	#TODO: flicker the player sprite to indicate invulnerability
-	set_deferred("monitorable", false)
-	set_deferred("monitoring", false)
+	$Area2D.set_deferred("monitorable", false)
+	$Area2D.set_deferred("monitoring", false)
 	
 	$InvulnerabilityTimer.start(time)
 
@@ -80,8 +80,8 @@ func _lose_life() -> void:
 func _die() -> void:
 	_can_act = false
 
-	set_deferred("monitorable", false)
-	set_deferred("monitoring", false)
+	$Area2D.set_deferred("monitorable", false)
+	$Area2D.set_deferred("monitoring", false)
 
 func _on_area_2d_area_entered(_area: Area2D) -> void:
 	print("Player got hit aaaa")
@@ -97,10 +97,11 @@ func _on_area_2d_area_entered(_area: Area2D) -> void:
 		_die()
 
 func _on_invulnerability_timer_timeout() -> void:
-	set_deferred("monitorable", true)
-	set_deferred("monitoring", true)
+	$Area2D.set_deferred("monitorable", true)
+	$Area2D.set_deferred("monitoring", true)
 
 func start_game() -> void:
+	_spawn_position = global_position
 	_lives = 4
 	
 	_set_invulnerable(2.0)
