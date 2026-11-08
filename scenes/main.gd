@@ -1,6 +1,7 @@
 extends Node2D
 
 const ASTEROID_SCENE = preload("res://scenes/obstacles/asteroid.tscn")
+const PLAYER_SCENE = preload("res://scenes/player/player.tscn")
 const INITIAL_ASTEROIDS_NUMBER = 4
 
 var score: int = 0
@@ -9,6 +10,9 @@ var score: int = 0
 func _ready() -> void:
 	for i in INITIAL_ASTEROIDS_NUMBER:
 		spawn_big_asteroid()
+	
+	_spawn_player()
+	_teleport_player_to_spawn()
 
 
 func spawn_big_asteroid(spawn_position: Vector2 = Vector2.ZERO) -> void:
@@ -51,3 +55,16 @@ func _spawn_split_asteroid(asteroid_position: Vector2, hp: int, direction: Vecto
 
 		asteroid.destroyed.connect(_on_asteroid_destroyed)
 		add_child(asteroid)
+
+func _spawn_player() -> void:
+	var player: Player = PLAYER_SCENE.instantiate()
+	
+	#connect signals
+	
+	player.scale = Vector2.ONE * 0.5
+	
+	add_child(player)
+	print("Player size: ", GameUtils.get_polygon_size($Player/Polygon2D.polygon))
+
+func _teleport_player_to_spawn() -> void:
+	$Player.global_position = $PlayerSpawnMarker2D.global_position
