@@ -5,6 +5,7 @@ const PLAYER_SCENE = preload("res://scenes/player/player.tscn")
 const INITIAL_ASTEROIDS_NUMBER = 4
 
 var score: int = 0
+var player_node: Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -54,19 +55,38 @@ func _spawn_player() -> void:
 	
 	player.scale = Vector2.ONE * 0.5
 	
+	player_node = player
 	add_child(player)
 	print("Player size: ", GameUtils.get_polygon_size($Player/Polygon2D.polygon))
 
 func _teleport_player_to_spawn() -> void:
 	$Player.global_position = $PlayerSpawnMarker2D.global_position
 
+func _start_game() -> void:
+	$HUD/UI.show()
+	$HUD/MainMenu.hide()
+	
+	_delete_asteroids()
+
+	for i in INITIAL_ASTEROIDS_NUMBER:
+		spawn_big_asteroid()
+	
+	player_node.start_game()
+
+func _delete_asteroids() -> void:
+	print(get_tree().get_nodes_in_group("asteroids"))
+	get_tree().call_group("asteroids", "queue_free")
+
 func _on_player_hit(lives: int) -> void:
-	$HUD/UI/TextureProgressBar.value = lives
+	$HUD/UI/GridContainer/TextureProgressBar.value = lives
 
 func _on_asteroid_destroyed(points: int, asteroid_position: Vector2, hp: int, direction: Vector2) -> void:
 	score += points
-	$HUD/UI/Label.text = str(score)
+	$HUD/UI/GridContainer/Label.text = str(score)
 
 	if hp > 1:
 		call_deferred("_spawn_split_asteroid", asteroid_position, hp, direction)
 		
+
+func _on_play_main_menu_button_pressed() -> void:
+	_start_game()

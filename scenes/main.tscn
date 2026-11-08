@@ -91,3 +91,5 @@ text = "exit"
 [node name="PlayerSpawnMarker2D" type="Marker2D" parent="." unique_id=1450719650]
 position = Vector2(960, 540)
 metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="HUD/MainMenu/GridContainer/PlayMainMenuButton" to="." method="_on_play_main_menu_button_pressed"]
