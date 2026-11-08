@@ -18,6 +18,7 @@ antialiased = true
 polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
 
 [node name="IntangibleTimer" type="Timer" parent="." unique_id=561950065]
+wait_time = 0.5
 one_shot = true
 autostart = true
 
