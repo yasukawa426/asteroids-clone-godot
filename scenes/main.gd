@@ -92,3 +92,7 @@ func _on_asteroid_destroyed(points: int, asteroid_position: Vector2, hp: int, di
 
 func _on_hud_start_game() -> void:
 	_start_game()
+
+
+func _on_hud_exit() -> void:
+	get_tree().quit()

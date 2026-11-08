@@ -22,4 +22,5 @@ process_mode = 3
 position = Vector2(960, 540)
 metadata/_edit_lock_ = true
 
+[connection signal="exit" from="HUD" to="." method="_on_hud_exit"]
 [connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
