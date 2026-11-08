@@ -4,7 +4,7 @@ const MAX_SPEED = 700 # pixels/s
 const ACCELERATION: float = MAX_SPEED * 1.5 # pixel/s²
 const TURN_SPEED = 5.0
 
-@export var bullet_scene: PackedScene = preload("res://scenes/player/bullet.tscn") 
+@export var bullet_scene: PackedScene = preload("res://scenes/player/bullet.tscn")
 
 var screen_bounds: Vector2
 
@@ -48,3 +48,19 @@ func _shoot() -> void:
 	
 	$ShootCooldownTimer.start()
 	add_sibling(bullet)
+
+# Disables the player hitbox for `time` seconds
+func _set_invulnerable(time: float) -> void:
+	set_deferred("monitorable", false)
+	set_deferred("monitoring", false)
+	
+	$InvulnerabilityTimer.start(time)
+func _on_invulnerability_timer_timeout() -> void:
+	set_deferred("monitorable", true)
+	set_deferred("monitoring", true)
+	
+
+func start_game() -> void:
+	_lives = 4
+	
+	_set_invulnerable(2.0)
