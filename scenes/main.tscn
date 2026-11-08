@@ -27,25 +27,24 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+scale = Vector2(0.8, 0.8)
 
-[node name="TextureProgressBar" type="TextureProgressBar" parent="HUD/UI" unique_id=382615828]
+[node name="GridContainer" type="GridContainer" parent="HUD/UI" unique_id=956618599]
 layout_mode = 0
-offset_left = 19.0
-offset_top = 58.0
-offset_right = 305.0
-offset_bottom = 134.0
-scale = Vector2(0.5706454, 0.7199997)
+offset_left = 18.749998
+offset_right = 304.75
+offset_bottom = 173.0
+
+[node name="Label" type="Label" parent="HUD/UI/GridContainer" unique_id=1432233174]
+layout_mode = 2
+text = "0"
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="HUD/UI/GridContainer" unique_id=382615828]
+layout_mode = 2
 max_value = 4.0
 value = 4.0
 texture_progress = ExtResource("3_sugp2")
-
-[node name="Label" type="Label" parent="HUD/UI" unique_id=1432233174]
-layout_mode = 0
-offset_left = 20.0
-offset_right = 203.0
-offset_bottom = 63.0
-scale = Vector2(1, 0.9846155)
-text = "0"
+texture_progress_offset = Vector2(-2, 0)
 
 [node name="MainMenu" type="Control" parent="HUD" unique_id=1839171266]
 layout_mode = 3
