@@ -456,10 +456,6 @@ grow_vertical = 0
 layout_mode = 2
 text = "play"
 
-[node name="CreditsMainMenuButton" parent="MainMenu/MenuGridContainer" unique_id=1762140166 instance=ExtResource("2_bo48s")]
-layout_mode = 2
-text = "credits"
-
 [node name="ExitMainMenuButton" parent="MainMenu/MenuGridContainer" unique_id=1815108260 instance=ExtResource("2_bo48s")]
 layout_mode = 2
 text = "exit"
