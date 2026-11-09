@@ -1,7 +1,13 @@
 [gd_resource type="Theme" format=3 uid="uid://df6s5o285bs38"]
 
-[ext_resource type="FontFile" uid="uid://tn3iudd2y6ri" path="res://assets/theme/Hyperspace-JvEM.ttf" id="1_5x3i2"]
+[ext_resource type="FontFile" uid="uid://tn3iudd2y6ri" path="res://assets/theme/Hyperspace-JvEM.ttf" id="1_r3pl3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ny3hw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_enqth"]
 
 [resource]
-default_font = ExtResource("1_5x3i2")
+default_font = ExtResource("1_r3pl3")
 default_font_size = 75
+Button/styles/focus = SubResource("StyleBoxEmpty_ny3hw")
+Button/styles/hover = SubResource("StyleBoxEmpty_enqth")
