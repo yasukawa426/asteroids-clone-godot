@@ -148,8 +148,8 @@ func _die() -> void:
 # When hit by an asteroid, if the player has lives left, it loses a life and respawns. If it has no lives left, it dies and emits the gameover signal.
 func _on_area_2d_area_entered(_area: Area2D) -> void:
 	print("Player got hit aaaa")
-	if _lives > 0:
-		_lives -= 1
+	_lives -= 1
+	if _lives > -1:
 		hit.emit(_lives)
 
 		_set_invulnerable(RESPAWN_TIME + 2.0)
@@ -179,3 +179,6 @@ func life_up() -> int:
 		_lives += 1
 	
 	return _lives
+
+func is_alive() -> bool:
+	return _lives > -1
