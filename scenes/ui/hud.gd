@@ -1,7 +1,6 @@
 class_name HUD extends CanvasLayer
-signal start_game(should_reset: bool)
+signal start_game
 signal exit
-signal credits
 
 @export var animation_player: AnimationPlayer;
 @export var gameover_animation_player: AnimationPlayer;
@@ -23,7 +22,7 @@ func _hide_gameover() -> void:
 	gameover_animation_player.play("hide_gameover")
 
 func _on_play_main_menu_button_pressed() -> void:
-	start_game.emit(false)
+	start_game.emit()
 	_show_ingame_ui()
 
 func _on_exit_main_menu_button_pressed() -> void:
@@ -38,7 +37,7 @@ func show_gameover() -> void:
 	gameover_animation_player.play("show_gameover")
 
 func _on_again_button_pressed() -> void:
-	start_game.emit(true)
+	start_game.emit()
 	gameover_animation_player.play("hide_gameover")
 	
 

@@ -7,6 +7,7 @@ const ASTEROID_SPAWN_DELAY: float = 2.0
 const SCORE_FOR_LIFE_UP: int = 5000
 
 var _life_score: int = 0
+var _should_reset: bool = false
 var score: int = 0
 var player_node: Player
 var number_of_asteroids_to_spawn: int = INITIAL_ASTEROIDS_NUMBER
@@ -73,6 +74,7 @@ func _teleport_player_to_spawn() -> void:
 	player_node.global_position = $PlayerSpawnMarker2D.global_position
 
 func _start_game(should_reset: bool) -> void:
+	_should_reset = true
 	_set_score(0)
 	number_of_asteroids_to_spawn = INITIAL_ASTEROIDS_NUMBER
 	
@@ -131,15 +133,14 @@ func _on_asteroid_destroyed(points: int, asteroid_position: Vector2, hp: int, di
 			$SpawnAsteroidTimer.start()
 
 
-func _on_hud_start_game(should_reset: bool) -> void:
-	_start_game(should_reset)
+func _on_hud_start_game() -> void:
+	_start_game(_should_reset)
 
 
 func _on_hud_exit() -> void:
 	get_tree().quit()
 
 func _on_player_gameover() -> void:
-	$GameoverAudioStreamPlayer.play()
 	hud_node.show_gameover()
 
 
