@@ -5,6 +5,7 @@
 [node name="MainMenuButton" type="Button" unique_id=428986994]
 offset_right = 8.0
 offset_bottom = 8.0
+mouse_default_cursor_shape = 2
 text = "TEXT"
 flat = true
 alignment = 0
