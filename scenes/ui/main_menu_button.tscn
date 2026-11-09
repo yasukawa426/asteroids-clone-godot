@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bb38c7o0c2egf"]
 
 [ext_resource type="Script" uid="uid://lywj84k170xs" path="res://scenes/ui/main_menu_button.gd" id="1_l3bdy"]
+[ext_resource type="AudioStream" uid="uid://cjy0i10fn5npq" path="res://assets/audio/Button_1.wav" id="3_lesp2"]
 
 [node name="MainMenuButton" type="Button" unique_id=428986994]
 offset_right = 8.0
@@ -10,3 +11,9 @@ text = "TEXT"
 flat = true
 alignment = 0
 script = ExtResource("1_l3bdy")
+
+[node name="PressedAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=244704117]
+stream = ExtResource("3_lesp2")
+volume_db = -10.0
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

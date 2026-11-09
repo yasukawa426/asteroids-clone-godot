@@ -16,3 +16,6 @@ func _on_focus_entered() -> void:
 
 func _on_focus_exited() -> void:
 	text = original_text
+
+func _on_pressed() -> void:
+	$PressedAudioStreamPlayer.play()
