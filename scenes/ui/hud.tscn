@@ -296,10 +296,101 @@ _data = {
 &"show_ui": SubResource("Animation_gss2c")
 }
 
-[node name="HUD" type="CanvasLayer" unique_id=1362206670 node_paths=PackedStringArray("animation_player")]
+[sub_resource type="Animation" id="Animation_h022r"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gameover:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gameover:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_4jqwt"]
+resource_name = "hide_gameover"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gameover:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gameover:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(2, 2),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 844)]
+}
+
+[sub_resource type="Animation" id="Animation_kicr4"]
+resource_name = "show_gameover"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Gameover:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 1,
+"values": [true, true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Gameover:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, 844), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mj13f"]
+_data = {
+&"RESET": SubResource("Animation_h022r"),
+&"hide_gameover": SubResource("Animation_4jqwt"),
+&"show_gameover": SubResource("Animation_kicr4")
+}
+
+[node name="HUD" type="CanvasLayer" unique_id=1362206670 node_paths=PackedStringArray("animation_player", "gameover_animation_player")]
 layer = 10000
 script = ExtResource("1_bo48s")
 animation_player = NodePath("AnimationPlayer")
+gameover_animation_player = NodePath("GameoverAnimationPlayer")
 
 [node name="UI" type="Control" parent="." unique_id=1675502290]
 visible = false
@@ -331,6 +422,7 @@ texture_progress = ExtResource("1_hqnrr")
 texture_progress_offset = Vector2(-2, 0)
 
 [node name="MainMenu" type="Control" parent="." unique_id=1614413166]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -372,9 +464,57 @@ text = "credits"
 layout_mode = 2
 text = "exit"
 
+[node name="Gameover" type="Control" parent="." unique_id=1237404553]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GridContainer" type="GridContainer" parent="Gameover" unique_id=1771647612]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -207.50024
+offset_top = -206.00018
+offset_right = 207.50024
+offset_bottom = 206.00018
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameoverLabel" type="Label" parent="Gameover/GridContainer" unique_id=1555585671]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "GAME OVER"
+
+[node name="AgainButton" parent="Gameover/GridContainer" unique_id=1067446243 instance=ExtResource("2_bo48s")]
+layout_mode = 2
+text = "try again"
+
+[node name="MenuButton" parent="Gameover/GridContainer" unique_id=850021078 instance=ExtResource("2_bo48s")]
+layout_mode = 2
+text = "menu"
+
+[node name="ExitButton" parent="Gameover/GridContainer" unique_id=2091256177 instance=ExtResource("2_bo48s")]
+layout_mode = 2
+text = "exit"
+
+[node name="BoxContainer" type="BoxContainer" parent="Gameover/GridContainer" unique_id=1535098309]
+layout_mode = 2
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1087353842]
 libraries/ = SubResource("AnimationLibrary_136eg")
 autoplay = &"RESET"
 
+[node name="GameoverAnimationPlayer" type="AnimationPlayer" parent="." unique_id=67094511]
+libraries/ = SubResource("AnimationLibrary_mj13f")
+
 [connection signal="pressed" from="MainMenu/MenuGridContainer/PlayMainMenuButton" to="." method="_on_play_main_menu_button_pressed"]
 [connection signal="pressed" from="MainMenu/MenuGridContainer/ExitMainMenuButton" to="." method="_on_exit_main_menu_button_pressed"]
+[connection signal="pressed" from="Gameover/GridContainer/AgainButton" to="." method="_on_again_button_pressed"]
+[connection signal="pressed" from="Gameover/GridContainer/ExitButton" to="." method="_on_exit_main_menu_button_pressed"]
