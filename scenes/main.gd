@@ -92,6 +92,7 @@ func _start_game(should_reset: bool) -> void:
 func _delete_asteroids() -> void:
 	print(get_tree().get_nodes_in_group("asteroids"))
 	number_of_remaining_asteroids = 0
+	$SpawnAsteroidTimer.stop()
 	get_tree().call_group("asteroids", "queue_free")
 
 # Increase the score by the given value and update the HUD. If the score reaches a certain threshold, the player gains an extra life.
@@ -102,7 +103,7 @@ func _set_score(value: int) -> void:
 	if value == 0:
 		_life_score = 0
 
-	if _life_score >= SCORE_FOR_LIFE_UP:
+	while _life_score >= SCORE_FOR_LIFE_UP:
 		_life_score -= SCORE_FOR_LIFE_UP
 		hud_node.update_lives(player_node.life_up())
 		
