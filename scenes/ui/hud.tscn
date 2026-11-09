@@ -505,4 +505,5 @@ libraries/ = SubResource("AnimationLibrary_mj13f")
 [connection signal="pressed" from="MainMenu/MenuGridContainer/PlayMainMenuButton" to="." method="_on_play_main_menu_button_pressed"]
 [connection signal="pressed" from="MainMenu/MenuGridContainer/ExitMainMenuButton" to="." method="_on_exit_main_menu_button_pressed"]
 [connection signal="pressed" from="Gameover/GridContainer/AgainButton" to="." method="_on_again_button_pressed"]
+[connection signal="pressed" from="Gameover/GridContainer/MenuButton" to="." method="_on_menu_button_pressed"]
 [connection signal="pressed" from="Gameover/GridContainer/ExitButton" to="." method="_on_exit_main_menu_button_pressed"]
