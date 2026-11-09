@@ -32,6 +32,9 @@ func _ready() -> void:
 		line.points = [polygon[i], polygon[(i + 1) % polygon.size()]] # connects each point to the next point, and the last point to the first point
 		$Polygon2D.add_child(line)
 		_lines.append(line)
+	
+	if _can_act:
+		GameUtils.flicker_sprite(4, self)
 
 func _physics_process(delta: float) -> void:
 	if _can_act:
@@ -78,7 +81,6 @@ func _set_invulnerable(time: float) -> void:
 
 # Explodes the player and resets its position after a delay. The player is invulnerable during this time.
 func _lose_life() -> void:
-	#TODO:play sound
 	_can_act = false
 
 	var tween: Tween = create_tween()
@@ -91,6 +93,8 @@ func _lose_life() -> void:
 	rotation = 0
 	global_position = _spawn_position
 	_can_act = true
+
+	GameUtils.flicker_sprite($InvulnerabilityTimer.time_left, self)
 
 # Spawns an explosion effect by duplicating the lines of the player, hiding the original lines, and tweening the duplicates to move away from the player.
 func _explode() -> void:
@@ -162,10 +166,13 @@ func _on_invulnerability_timer_timeout() -> void:
 
 # Resets the player lives and position, and makes it invulnerable for a short time.
 func start_game() -> void:
+	const INVULNERABILITY_TIME: float = 2.0
+
 	_spawn_position = global_position
 	_lives = 4
 	
-	_set_invulnerable(2.0)
+	_set_invulnerable(INVULNERABILITY_TIME)
+	GameUtils.flicker_sprite(INVULNERABILITY_TIME, self)
 	_can_act = true
 	
 ## Gives the player one more life with a max of 4. Returns the current lives.
