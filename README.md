@@ -26,14 +26,14 @@ You can move and shoot and stuff and die.
 - [x] Player can shoot. The ship will shoot in the direction its facing and destroy asteroids. Bullets will despawn after a while.
 - [x] Asteroids with 3 different sizes.
   - [x] Asteroids will break into 2 smaller asteroids when shot. The smallest variation will disappear when shot.
-  - [ ] Asteroids will drift around until the hit the player or are shot. If the player collides with one, they lose a life. Player explodes, after 3 seconds respawn in the middle.
-  - [ ] Asteroid spawns in waves. For example, 4 big asteroids spawn in moving in random directions - the player kills all - then 5 big asteroids spawn after a short delay.
+  - [X] Asteroids will drift around until the hit the player or are shot. If the player collides with one, they lose a life. Player explodes, after 3 seconds respawn in the middle.
+  - [X] Asteroid spawns in waves. For example, 4 big asteroids spawn in moving in random directions - the player kills all - then 5 big asteroids spawn after a short delay.
   - [x] Varying speed
 - [x] Add score
 - [x] Add screen wrapping.
 - [ ] Add menus and UI.
-  - [x] Start menu
-  - [ ] Gameover
+  - [X] Start menu
+  - [X] Gameover
   - [ ] Credits
 - [ ] Add sound effects and particles effects.
   - [ ] Shoot
