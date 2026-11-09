@@ -103,12 +103,14 @@ func _set_score(value: int) -> void:
 	if value == 0:
 		_life_score = 0
 
+	var life_up: bool = false
 	while _life_score >= SCORE_FOR_LIFE_UP:
+		life_up = true
 		_life_score -= SCORE_FOR_LIFE_UP
 		hud_node.update_lives(player_node.life_up())
-		
-		#TODO: play sound effect
-
+	
+	if life_up:
+		$LifeAudioStreamPlayer.play()
 
 	hud_node.update_score(score)
 
@@ -137,6 +139,7 @@ func _on_hud_exit() -> void:
 	get_tree().quit()
 
 func _on_player_gameover() -> void:
+	$GameoverAudioStreamPlayer.play()
 	hud_node.show_gameover()
 
 
