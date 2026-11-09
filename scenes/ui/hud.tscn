@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://crc3nyk76b37f"]
 
 [ext_resource type="Script" uid="uid://b13m2ovr6ims6" path="res://scenes/ui/hud.gd" id="1_bo48s"]
-[ext_resource type="Texture2D" uid="uid://dki1k4udrdnhk" path="res://assets/lives_transparent.png" id="1_hqnrr"]
+[ext_resource type="Texture2D" uid="uid://dki1k4udrdnhk" path="res://assets/icons/lives_transparent.png" id="1_hqnrr"]
 [ext_resource type="PackedScene" uid="uid://bb38c7o0c2egf" path="res://scenes/ui/main_menu_button.tscn" id="2_bo48s"]
 
 [sub_resource type="Animation" id="Animation_bo48s"]
