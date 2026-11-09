@@ -109,6 +109,7 @@ func _set_score(value: int) -> void:
 	_life_score += value
 	
 	if value == 0:
+		score = 0
 		_life_score = 0
 
 	var life_up: bool = false
