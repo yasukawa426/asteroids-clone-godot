@@ -6,6 +6,11 @@ const INITIAL_ASTEROIDS_NUMBER: int = 4
 const ASTEROID_SPAWN_DELAY: float = 2.0
 const SCORE_FOR_LIFE_UP: int = 5000
 
+const AMBIENCE_BASE_INTERVAL: float = 4.0 # initial interval between dings
+const AMBIENCE_MIN_INTERVAL: float = 0.5 # minimum interval
+const AMBIENCE_SCORE_INTERVAL: int = 8000 # the score at which the minimum is reached
+
+
 var _life_score: int = 0
 var _should_reset: bool = false
 var score: int = 0
@@ -74,6 +79,7 @@ func _teleport_player_to_spawn() -> void:
 	player_node.global_position = $PlayerSpawnMarker2D.global_position
 
 func _start_game(should_reset: bool) -> void:
+	$AmbienceTimer.start()
 	_should_reset = true
 	_set_score(0)
 	number_of_asteroids_to_spawn = INITIAL_ASTEROIDS_NUMBER
@@ -141,8 +147,17 @@ func _on_hud_exit() -> void:
 	get_tree().quit()
 
 func _on_player_gameover() -> void:
+	$AmbienceTimer.stop()
 	hud_node.show_gameover()
 
 
 func _on_spawn_asteroid_timer_timeout() -> void:
 	_spawn_big_asteroid(number_of_asteroids_to_spawn)
+
+
+func _on_ambience_timer_timeout() -> void:
+	$AmbienceAudioStreamPlayer.play()
+	
+	var multiplier = AMBIENCE_BASE_INTERVAL - AMBIENCE_MIN_INTERVAL
+	var progress: float = float(score) / AMBIENCE_SCORE_INTERVAL
+	$AmbienceTimer.wait_time = maxf(AMBIENCE_BASE_INTERVAL - (progress * multiplier), AMBIENCE_MIN_INTERVAL)

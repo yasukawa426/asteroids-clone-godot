@@ -4,6 +4,35 @@
 [ext_resource type="PackedScene" uid="uid://crc3nyk76b37f" path="res://scenes/ui/hud.tscn" id="2_0wfyh"]
 [ext_resource type="AudioStream" uid="uid://c18aix2o2ve6m" path="res://assets/audio/life_up.wav" id="3_sugp2"]
 [ext_resource type="AudioStream" uid="uid://bvukopojlvt6" path="res://assets/audio/gameover.wav" id="4_jyhfs"]
+[ext_resource type="AudioStream" uid="uid://bpj2ayrldmkgk" path="res://assets/audio/Retro Instrument - crystal - C00.wav" id="5_muem4"]
+[ext_resource type="AudioStream" uid="uid://20u6r0s2ntdj" path="res://assets/audio/Retro Instrument - crystal - C01.wav" id="6_dp3eg"]
+[ext_resource type="AudioStream" uid="uid://bku87tiwhb2ph" path="res://assets/audio/Retro Instrument - crystal - C10.wav" id="7_0ld40"]
+[ext_resource type="AudioStream" uid="uid://d5d3ernh63la" path="res://assets/audio/Retro Instrument - crystal - C11.wav" id="8_gqmmt"]
+[ext_resource type="AudioStream" uid="uid://chl2g6ske5ek3" path="res://assets/audio/Retro Instrument - crystal - C12.wav" id="9_yc10j"]
+[ext_resource type="AudioStream" uid="uid://cujxqtsslsceb" path="res://assets/audio/Retro Instrument - crystal - C02.wav" id="10_jscy8"]
+[ext_resource type="AudioStream" uid="uid://bk3gtp8beoj4h" path="res://assets/audio/Retro Instrument - crystal - C03.wav" id="11_pm3ni"]
+[ext_resource type="AudioStream" uid="uid://bucmq1mi03wim" path="res://assets/audio/Retro Instrument - crystal - C04.wav" id="12_y6deb"]
+[ext_resource type="AudioStream" uid="uid://pxgrwi5gq8pa" path="res://assets/audio/Retro Instrument - crystal - C05.wav" id="13_og1vs"]
+[ext_resource type="AudioStream" uid="uid://c42ahvd2gfv8a" path="res://assets/audio/Retro Instrument - crystal - C06.wav" id="14_2wyq8"]
+[ext_resource type="AudioStream" uid="uid://iccgecc55se4" path="res://assets/audio/Retro Instrument - crystal - C07.wav" id="15_vxglm"]
+[ext_resource type="AudioStream" uid="uid://b0jpk7l6p2nqh" path="res://assets/audio/Retro Instrument - crystal - C08.wav" id="16_2f3dj"]
+[ext_resource type="AudioStream" uid="uid://frt6ty23xkfb" path="res://assets/audio/Retro Instrument - crystal - C09.wav" id="17_yq6so"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_fv21b"]
+streams_count = 13
+stream_0/stream = ExtResource("5_muem4")
+stream_1/stream = ExtResource("6_dp3eg")
+stream_2/stream = ExtResource("10_jscy8")
+stream_3/stream = ExtResource("11_pm3ni")
+stream_4/stream = ExtResource("12_y6deb")
+stream_5/stream = ExtResource("13_og1vs")
+stream_6/stream = ExtResource("14_2wyq8")
+stream_7/stream = ExtResource("15_vxglm")
+stream_8/stream = ExtResource("16_2f3dj")
+stream_9/stream = ExtResource("17_yq6so")
+stream_10/stream = ExtResource("7_0ld40")
+stream_11/stream = ExtResource("8_gqmmt")
+stream_12/stream = ExtResource("9_yc10j")
 
 [node name="Main" type="Node2D" unique_id=1529492562]
 texture_filter = 1
@@ -27,14 +56,21 @@ metadata/_edit_lock_ = true
 [node name="SpawnAsteroidTimer" type="Timer" parent="." unique_id=874067202]
 one_shot = true
 
+[node name="AmbienceTimer" type="Timer" parent="." unique_id=784544196]
+wait_time = 0.1
+
 [node name="LifeAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2071582314]
 stream = ExtResource("3_sugp2")
-volume_db = -10.0
 
 [node name="GameoverAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=133333148]
 stream = ExtResource("4_jyhfs")
 volume_db = -10.0
 
+[node name="AmbienceAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=305541850]
+stream = SubResource("AudioStreamRandomizer_fv21b")
+volume_db = 7.0
+
 [connection signal="exit" from="HUD" to="." method="_on_hud_exit"]
 [connection signal="start_game" from="HUD" to="." method="_on_hud_start_game"]
 [connection signal="timeout" from="SpawnAsteroidTimer" to="." method="_on_spawn_asteroid_timer_timeout"]
+[connection signal="timeout" from="AmbienceTimer" to="." method="_on_ambience_timer_timeout"]
