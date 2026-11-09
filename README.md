@@ -31,16 +31,16 @@ You can move and shoot and stuff and die.
   - [x] Varying speed
 - [x] Add score
 - [x] Add screen wrapping.
-- [ ] Add menus and UI.
+- [X] Add menus and UI.
   - [X] Start menu
   - [X] Gameover
-  - [ ] Credits
-- [ ] Add sound effects and particles effects.
-  - [ ] Shoot
-  - [ ] Player hit
-  - [ ] Asteroid hit
-  - [ ] Gameover
-  - [ ] Life up
+- [X] Add sound effects and particles effects.
+  - [X] Shoot
+  - [X] Player hit
+  - [X] Asteroid hit
+  - [X] Gameover
+  - [X] Life up
+  - [X] UI
 
 ### Bonus
 
@@ -50,3 +50,5 @@ You can move and shoot and stuff and die.
 ### Credits
 
 Hyperspace Font by Pixel Sagas -- https://www.fontspace.com/hyperspace-font-f18038 <br/>
+200 Free SFX by Kronbits - https://kronbits.itch.io/freesfx <br/>
+HALFTONE SFX Pack by VOiD1 Gaming - https://void1gaming.itch.io/halftone-sound-effects-pack-lite
