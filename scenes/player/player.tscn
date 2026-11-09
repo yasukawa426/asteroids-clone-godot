@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c1owlh285f82h"]
 
 [ext_resource type="Script" uid="uid://cdtkn33nsdy8f" path="res://scenes/player/player.gd" id="1_3vyb7"]
+[ext_resource type="AudioStream" uid="uid://d2wvkc0nhuvvb" path="res://assets/audio/shoot.ogg" id="2_gmlin"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3vyb7"]
 size = Vector2(76, 74)
@@ -42,6 +43,11 @@ one_shot = true
 
 [node name="InvulnerabilityTimer" type="Timer" parent="." unique_id=290467158]
 one_shot = true
+
+[node name="ShootAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=625443760]
+stream = ExtResource("2_gmlin")
+volume_db = -10.0
+pitch_scale = 1.5
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="timeout" from="InvulnerabilityTimer" to="." method="_on_invulnerability_timer_timeout"]

@@ -73,6 +73,7 @@ func _shoot() -> void:
 	
 	
 	$ShootCooldownTimer.start()
+	$ShootAudioStreamPlayer.play()
 	add_sibling(bullet)
 
 # Disables the player hitbox for `time` seconds
