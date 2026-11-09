@@ -34,15 +34,12 @@ func _ready() -> void:
 		_lines.append(line)
 
 func _physics_process(delta: float) -> void:
+	if _can_act:
+		_handle_input(delta)
+
 	move_and_slide()
-	
-	if not _can_act:
-		return
-	
+
 	global_position = GameUtils.wrap_position(global_position, $CollisionShape2D.shape.get_rect().size)
-
-	_handle_input(delta)
-
 	velocity = velocity.limit_length(MAX_SPEED)
 
 
@@ -55,13 +52,8 @@ func _handle_input(delta: float) -> void:
 
 	if Input.is_action_pressed("thrust"):
 		velocity += move_direction * ACCELERATION * delta
-
-
-func _unhandled_input(event: InputEvent) -> void:
-	if not _can_act:
-		return
 	
-	if event.is_action_pressed("shoot") and $ShootCooldownTimer.is_stopped():
+	if Input.is_action_pressed("shoot") and $ShootCooldownTimer.is_stopped():
 		_shoot()
 
 # Spawns a bullet at the position of the BulletMarker2D node, and its direction is set to point from the player to the BulletMarker2D node.
@@ -139,6 +131,7 @@ func _set_lines_visible(value: bool) -> void:
 func _die() -> void:
 	_can_act = false
 
+
 	var tween: Tween = create_tween()
 	tween.tween_property(self, "velocity", Vector2.ZERO, 1)
 	_explode()
@@ -149,6 +142,7 @@ func _die() -> void:
 # When hit by an asteroid, if the player has lives left, it loses a life and respawns. If it has no lives left, it dies and emits the gameover signal.
 func _on_area_2d_area_entered(_area: Area2D) -> void:
 	print("Player got hit aaaa")
+	
 	_lives -= 1
 	if _lives > -1:
 		hit.emit(_lives)
