@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="Asteroids"
+config/name="Celestial Bodies"
 run/main_scene="uid://vq5qlf4fwb2t"
 config/features=PackedStringArray("4.6", "GL Compatibility")
 config/icon="uid://c0hdhgm3ig7xq"

@@ -16,7 +16,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(757, 139)]
+"values": [Vector2(594, 139)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -104,7 +104,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(2, 2),
 "update": 0,
-"values": [Vector2(757, 139), Vector2(757, -164)]
+"values": [Vector2(594, 139), Vector2(594, -164)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -208,7 +208,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.5),
 "transitions": PackedFloat32Array(2, 2),
 "update": 0,
-"values": [Vector2(757, -164), Vector2(757, 139)]
+"values": [Vector2(594, -164), Vector2(594, 139)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -422,7 +422,6 @@ texture_progress = ExtResource("1_hqnrr")
 texture_progress_offset = Vector2(-2, 0)
 
 [node name="MainMenu" type="Control" parent="." unique_id=1614413166]
-visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -435,12 +434,12 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -203.0
+offset_left = -366.0
 offset_top = 139.0
-offset_right = 204.0
-offset_bottom = 232.0
+offset_right = 366.00024
+offset_bottom = 232.00002
 grow_horizontal = 2
-text = "asteroids"
+text = "celestial bodies"
 
 [node name="MenuGridContainer" type="GridContainer" parent="MainMenu" unique_id=1074989187]
 layout_mode = 1
