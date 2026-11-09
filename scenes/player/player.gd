@@ -157,6 +157,7 @@ func _on_area_2d_area_entered(_area: Area2D) -> void:
 		
 	else:
 		_die()
+		get_tree().create_timer(RESPAWN_TIME * 0.7)
 		gameover.emit()
 
 # When the invulnerability timer times out, the player hitbox is re-enabled.
