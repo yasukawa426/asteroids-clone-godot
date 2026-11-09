@@ -11,13 +11,13 @@ var player_node: Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	spawn_big_asteroid(INITIAL_ASTEROIDS_NUMBER)
+	_spawn_big_asteroid(INITIAL_ASTEROIDS_NUMBER)
 	
 	_spawn_player()
 	_teleport_player_to_spawn()
 
 
-func spawn_big_asteroid(amount: int, spawn_position: Vector2 = Vector2.ZERO) -> void:
+func _spawn_big_asteroid(amount: int, spawn_position: Vector2 = Vector2.ZERO) -> void:
 	for i in amount:
 		var asteroid: Asteroid = ASTEROID_SCENE.instantiate()
 
@@ -49,11 +49,13 @@ func _spawn_split_asteroid(asteroid_position: Vector2, hp: int, direction: Vecto
 		asteroid.destroyed.connect(_on_asteroid_destroyed)
 		add_child(asteroid)
 
+# Instantiate a new player and add it to the scene. Connects the player's hit signal to the _on_player_hit function.
 func _spawn_player() -> void:
 	var player: Player = PLAYER_SCENE.instantiate()
 	
 	#connect signals
 	player.hit.connect(_on_player_hit)
+	player.gameover.connect(_on_player_gameover)
 	
 	player.scale = Vector2.ONE * 0.5
 	
@@ -64,7 +66,22 @@ func _spawn_player() -> void:
 func _teleport_player_to_spawn() -> void:
 	player_node.global_position = $PlayerSpawnMarker2D.global_position
 
-func _start_game() -> void:
+func _start_game(should_reset: bool) -> void:
+	score = 0
+	_life_score = 0
+	hud_node.update_score(score)
+	
+	if should_reset:
+		_delete_asteroids()
+		_spawn_big_asteroid(INITIAL_ASTEROIDS_NUMBER)
+
+		player_node.queue_free()
+
+		await player_node.tree_exited
+		_spawn_player()
+		_teleport_player_to_spawn()
+		hud_node.update_lives(player_node._lives)
+		
 	player_node.start_game()
 
 func _delete_asteroids() -> void:
@@ -90,9 +107,12 @@ func _on_asteroid_destroyed(points: int, asteroid_position: Vector2, hp: int, di
 		call_deferred("_spawn_split_asteroid", asteroid_position, hp, direction)
 		
 
-func _on_hud_start_game() -> void:
-	_start_game()
+func _on_hud_start_game(should_reset: bool) -> void:
+	_start_game(should_reset)
 
 
 func _on_hud_exit() -> void:
 	get_tree().quit()
+
+func _on_player_gameover() -> void:
+	hud_node.show_gameover()
