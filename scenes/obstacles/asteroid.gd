@@ -77,7 +77,14 @@ func set_hp(value: int) -> void:
 	_is_ready = true
 
 func _die() -> void:
+	hide()
+	$DestroyedAudioStreamPlayer.play()
+	set_deferred("monitorable", false)
+	set_deferred("monitoring", false)
+	
 	destroyed.emit(_score, global_position, _hp, direction)
+	
+	await $DestroyedAudioStreamPlayer.finished
 	queue_free()
 
 #TODO: make the asteroids flicker when intangible

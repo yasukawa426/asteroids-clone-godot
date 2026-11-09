@@ -1,6 +1,13 @@
 [gd_scene format=3 uid="uid://bp2e4nrp4tx3r"]
 
 [ext_resource type="Script" uid="uid://plyt27o1f071" path="res://scenes/obstacles/asteroid.gd" id="1_tm00o"]
+[ext_resource type="AudioStream" uid="uid://dflkw2mwiwkvn" path="res://assets/audio/asteroid1.wav" id="2_kd7k4"]
+[ext_resource type="AudioStream" uid="uid://28b4eoqlvkrv" path="res://assets/audio/asteroid2.ogg" id="3_b454a"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_ppta2"]
+streams_count = 2
+stream_0/stream = ExtResource("2_kd7k4")
+stream_1/stream = ExtResource("3_b454a")
 
 [node name="Asteroid" type="Area2D" unique_id=1826148465 groups=["asteroids"]]
 collision_layer = 4
@@ -21,6 +28,9 @@ polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
 wait_time = 0.5
 one_shot = true
 autostart = true
+
+[node name="DestroyedAudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=1536361697]
+stream = SubResource("AudioStreamRandomizer_ppta2")
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="IntangibleTimer" to="." method="_on_intangible_timer_timeout"]
