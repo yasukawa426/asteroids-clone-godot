@@ -49,6 +49,6 @@ You can move and shoot and stuff and die.
 
 ### Credits
 
-Hyperspace Font by Pixel Sagas -- https://www.fontspace.com/hyperspace-font-f18038 <br/>
+Hyperspace Font by Pixel Sagas - https://www.fontspace.com/hyperspace-font-f18038 <br/>
 200 Free SFX by Kronbits - https://kronbits.itch.io/freesfx <br/>
 HALFTONE SFX Pack by VOiD1 Gaming - https://void1gaming.itch.io/halftone-sound-effects-pack-lite
